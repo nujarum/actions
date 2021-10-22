@@ -2,6 +2,12 @@ name: CodeQL Analyze
 
 on:
   workflow_call:
+    inputs:
+      config:
+        default: nujarum/actions/.github/codeql/config.yml@main
+        description: Config file for CodeQL Analyze
+        required: false
+        type: string
 
 jobs:
   codeql-analyze:
@@ -27,7 +33,7 @@ jobs:
       - name: Initialize CodeQL
         uses: github/codeql-action/init@v1
         with:
-          config-file: ./.github/codeql/config.yml
+          config-file: ${{ inputs.config }}
           languages: ${{ matrix.language }}
       - name: Perform CodeQL Analysis
         uses: github/codeql-action/analyze@v1
