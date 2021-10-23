@@ -42,6 +42,11 @@ jobs:
           node-version: 16
           registry-url: https://npm.pkg.github.com/
           scope: ${{ inputs.scope }}
+      - name: Add scope to the package name
+        run: |
+          sed -i -E '2 s/"name":\s*\"(.+)"/"name": "${{ inputs.scope }}\/\1"/' ./package.json ./package-lock.json
+          head -2 ./package.json
+          head -2 ./package-lock.json
       - name: Publish to gpr
         env:
           NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
