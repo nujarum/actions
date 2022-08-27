@@ -28,6 +28,7 @@ jobs:
       - name: Setup Node.js for npm
         uses: actions/setup-node@v3
         with:
+          check-latest: true
           node-version: 16
           registry-url: https://registry.npmjs.org/
       - name: Run npm ci
@@ -39,6 +40,7 @@ jobs:
       - name: Setup Node.js for gpr
         uses: actions/setup-node@v3
         with:
+          check-latest: true
           node-version: 16
           registry-url: https://npm.pkg.github.com/
           scope: ${{ inputs.scope }}
