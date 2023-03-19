@@ -27,6 +27,7 @@ jobs:
         with:
           check-latest: true
           node-version: ${{ matrix.node }}
-      - run: npm cache clean --force && npm i -g npm@9.5 --registry=https://registry.npmjs.org
+      - run: npm cache clean --force
+      - run: npm i -g npm@9.5.0 --registry=https://registry.npmjs.org
       - run: npm ci
       - run: npm test --if-present
