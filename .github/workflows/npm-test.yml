@@ -16,6 +16,9 @@ jobs:
           - 14
           - 16
           - 18
+        include:
+          - node: 14
+            npm: 8
 
     runs-on: ${{ matrix.os }}
 
@@ -27,7 +30,7 @@ jobs:
         with:
           check-latest: true
           node-version: ${{ matrix.node }}
-      - run: npm cache clean --force
-      - run: npm i -g npm@9.5.0 --registry=https://registry.npmjs.org
+      - if: ${{ matrix.npm }}
+        run: npm install -g npm@${{ matrix.npm }}
       - run: npm ci
       - run: npm test --if-present
