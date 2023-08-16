@@ -5,7 +5,6 @@ on:
 
 jobs:
   npm-test:
-
     strategy:
       fail-fast: false
       matrix:
@@ -13,12 +12,9 @@ jobs:
           - ubuntu-latest
           - windows-latest
         node:
-          - 14
           - 16
           - 18
-        include:
-          - node: 14
-            npm: 8
+          - 20
 
     runs-on: ${{ matrix.os }}
 
@@ -30,7 +26,5 @@ jobs:
         with:
           check-latest: true
           node-version: ${{ matrix.node }}
-      - if: ${{ matrix.npm }}
-        run: npm install -g npm@${{ matrix.npm }}
       - run: npm ci
       - run: npm test --if-present
